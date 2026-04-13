@@ -1,0 +1,17 @@
+{
+  "tiers": {
+    "TimeSeriesQueryAgent": 1,
+    "SQLQueryAgent": 1,
+    "LogRetrievalAgent": 1,
+    "MetadataLookupAgent": 1,
+    "SummaryAgent": 1,
+    "StatisticalAnalysisAgent": 2,
+    "TrendAnalysisAgent": 2,
+    "AnomalyDetectionAgent": 2,
+    "PlotGenerationAgent": 2,
+    "ReportWriterAgent": 2,
+    "APIDataFetchAgent": 3,
+    "ForecastAgent": 3
+  },
+  "notes": "Canonical ordinal proxy cost tiers for the 12-agent benchmark. Tier 1 = retrieval/lookup/light summarization, Tier 2 = analysis/visualization/report synthesis, Tier 3 = external fetch or inference-heavy forecasting."
+}

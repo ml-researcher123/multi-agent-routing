@@ -1,0 +1,52 @@
+{
+  "agents": [
+    {
+      "name": "TimeSeriesQueryAgent",
+      "description": "Retrieves time-series numerical data from internal data stores over a time range and interval; supports hourly/daily windows, filtering by metric name, and returning arrays ready for analysis or plotting. Example: 'get wind speed for last 24 hours'."
+    },
+    {
+      "name": "SQLQueryAgent",
+      "description": "Executes structured SQL-like queries over tabular data: filters, joins, aggregations, grouping, ID lookups, and simple transformations on rows/columns. Example: 'select rows where customer_id = 1023'."
+    },
+    {
+      "name": "APIDataFetchAgent",
+      "description": "Fetches live or recent data from REST APIs using endpoints and query parameters; handles auth, pagination, JSON payloads, and external services. Example: 'call /metrics/v1 to fetch telemetry JSON'."
+    },
+    {
+      "name": "LogRetrievalAgent",
+      "description": "Retrieves and filters system/application logs by keywords, severity, timestamps, patterns, and service names; returns relevant log slices for debugging. Example: 'show ERROR logs for API Gateway'."
+    },
+    {
+      "name": "MetadataLookupAgent",
+      "description": "Finds schema info, column descriptions, dataset metadata, and what data exists; answers 'what fields are available' and data catalog questions. Example: 'list columns in transactions table'."
+    },
+    {
+      "name": "StatisticalAnalysisAgent",
+      "description": "Computes statistics on numeric data: mean, variance, correlations, distributions, summary metrics, and quick sanity checks for ranges or outliers. Example: 'compute mean and std dev for temperature'."
+    },
+    {
+      "name": "TrendAnalysisAgent",
+      "description": "Detects trends and long-term patterns in time series; can identify seasonality, slope changes, and high-level direction over a period. Example: 'identify trend over past 7 days'."
+    },
+    {
+      "name": "AnomalyDetectionAgent",
+      "description": "Detects spikes, drops, outliers, and unusual patterns in numeric/time-series signals; highlights events worth investigating. Example: 'find anomalies in power output'."
+    },
+    {
+      "name": "ForecastAgent",
+      "description": "Predicts future values from historical time-series using forecasting logic; supports horizons, projections, and confidence-style summaries. Example: 'forecast next 72 hours of wind speed'."
+    },
+    {
+      "name": "PlotGenerationAgent",
+      "description": "Creates plots/charts (line, bar, scatter, histogram) to visualize numeric or time-series data; chooses appropriate chart type for the request. Example: 'plot temperature over last week'."
+    },
+    {
+      "name": "SummaryAgent",
+      "description": "Summarizes data and insights in concise natural language; focuses on key points, changes, conclusions, and next-step takeaways. Example: 'summarize what happened today'."
+    },
+    {
+      "name": "ReportWriterAgent",
+      "description": "Writes structured detailed reports with sections, narrative, and formatted explanations of analysis; suitable for stakeholders or documentation. Example: 'write a detailed report about last week'."
+    }
+  ]
+}
