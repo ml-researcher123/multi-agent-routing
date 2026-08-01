@@ -5,3 +5,4 @@ torch>=2.1
 sentence-transformers>=2.6
 matplotlib>=3.7
 openai>=1.0
+datasets>=2.18

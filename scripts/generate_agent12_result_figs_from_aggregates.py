@@ -10,6 +10,15 @@ import pandas as pd
 
 
 METHOD_ORDER = ["Majority", "KNN", "ML", "CC", "MLkNN", "Encoder", "LLM (zero-shot)"]
+METHOD_LABELS = {
+    "Majority": "Majority",
+    "KNN": "Profile retrieval",
+    "ML": "Linear SVM",
+    "CC": "CC",
+    "MLkNN": "ML-kNN",
+    "Encoder": "Encoder",
+    "LLM (zero-shot)": "GPT-4o (zero-shot)",
+}
 METHOD_COLORS = {
     "Majority": "#7a7a7a",
     "KNN": "#4c78a8",
@@ -107,7 +116,8 @@ def load_war_test_summary(path: str) -> pd.DataFrame:
 
 def plot_threshold_sweep(summary: pd.DataFrame, selected_threshold: float, out_path: str) -> None:
     fig, ax = plt.subplots(figsize=(8.2, 4.8))
-    methods = [m for m in METHOD_ORDER if m in set(summary["method"])]
+    # Only score-producing routers participate in the shared threshold sweep.
+    methods = [m for m in ["KNN", "ML", "CC", "MLkNN", "Encoder"] if m in set(summary["method"])]
     for method in methods:
         part = summary[summary["method"] == method].dropna(subset=["threshold", "f1_mean"]).sort_values("threshold")
         if part.empty:
@@ -118,7 +128,7 @@ def plot_threshold_sweep(summary: pd.DataFrame, selected_threshold: float, out_p
             marker="o",
             linewidth=2.2,
             markersize=5,
-            label=method,
+            label=METHOD_LABELS.get(method, method),
             color=METHOD_COLORS.get(method),
         )
         lower = (part["f1_mean"] - part["f1_std"]).clip(lower=0) * 100.0
@@ -165,7 +175,7 @@ def plot_pr_scatter(threshold_df: pd.DataFrame, selected_threshold: float, out_p
             zorder=3,
         )
         ax.annotate(
-            method,
+            METHOD_LABELS.get(method, method),
             (row["rec_mean"] * 100.0, row["prec_mean"] * 100.0),
             xytext=label_offsets.get(method, (6, 4)),
             textcoords="offset points",
@@ -193,7 +203,7 @@ def plot_avg_set_size(threshold_df: pd.DataFrame, selected_threshold: float, out
 
     fig, ax = plt.subplots(figsize=(8.0, 4.6))
     bars = ax.bar(
-        selected["method"],
+        [METHOD_LABELS.get(method, method) for method in selected["method"]],
         selected["avg_p_mean"],
         color=[METHOD_COLORS.get(method, "#666666") for method in selected["method"]],
         alpha=0.9,

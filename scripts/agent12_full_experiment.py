@@ -365,7 +365,15 @@ class FineTunedEncoderRouter(nn.Module):
         super().__init__()
         from sentence_transformers import SentenceTransformer
 
-        self.encoder = SentenceTransformer(model_name, local_files_only=True)
+        offline_values = {"1", "true", "yes", "on"}
+        local_files_only = (
+            os.environ.get("HF_HUB_OFFLINE", "0").strip().lower() in offline_values
+            or os.environ.get("TRANSFORMERS_OFFLINE", "0").strip().lower() in offline_values
+        )
+        self.encoder = SentenceTransformer(
+            model_name,
+            local_files_only=local_files_only,
+        )
         emb_dim = self.encoder.get_sentence_embedding_dimension()
         self.dropout = nn.Dropout(dropout)
         self.classifier = nn.Linear(emb_dim, num_labels)
@@ -711,6 +719,7 @@ def main():
     seed_majority_test: Dict[int, Optional[str]] = {}
     seed_encoder_test_probs: Dict[int, np.ndarray] = {}
     seed_encoder_class_names: Dict[int, List[str]] = {}
+    majority_agent_train = _majority_agent(train_data) if run_majority else None
 
     print("=== Training + Threshold Sweeps ===", flush=True)
     for seed in seeds:
@@ -787,9 +796,10 @@ def main():
         if mlknn_probs_dev is not None:
             mlknn_cands_dev = [_to_candidates(scores, agent_names) for scores in mlknn_probs_dev]
 
-        majority_agent_test = _majority_agent(test_data) if run_majority else None
+        # A baseline must be fitted on the training split only.
+        majority_agent_test = majority_agent_train
         seed_majority_test[seed] = majority_agent_test
-        majority_agent_dev = (_majority_agent(dev_data) if dev_data is not None else majority_agent_test) if run_majority else None
+        majority_agent_dev = majority_agent_train
         seed_majority_dev[seed] = majority_agent_dev
 
         extra_cands_test: Dict[str, List[List[Tuple[str, float]]]] = {}

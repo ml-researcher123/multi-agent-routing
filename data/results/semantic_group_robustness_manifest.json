@@ -1,0 +1,152 @@
+{
+  "train_csv": "/kaggle/working/semantic_group_split/semantic_group_train.csv",
+  "dev_csv": "/kaggle/working/semantic_group_split/semantic_group_dev.csv",
+  "test_csv": "/kaggle/working/semantic_group_split/semantic_group_test.csv",
+  "split_sizes": {
+    "train": 2400,
+    "dev": 301,
+    "test": 299
+  },
+  "split_manifest": "/kaggle/working/semantic_group_split/semantic_group_split_manifest.json",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "thresholds": [
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+  ],
+  "war_lambdas": [
+    0.0,
+    0.02,
+    0.05,
+    0.1,
+    0.15
+  ],
+  "utility_cost_lambda": 0.1,
+  "utility_extra_lambda": 0.05,
+  "embedder_model": "sentence-transformers/all-mpnet-base-v2",
+  "encoder_model_name": "sentence-transformers/all-mpnet-base-v2",
+  "encoder_epochs": 3,
+  "encoder_batch_size": 8,
+  "encoder_lr": 2e-05,
+  "encoder_weight_decay": 0.01,
+  "encoder_device": "cuda",
+  "profile_text_augmentation": true,
+  "semantic_split": {
+    "input_csvs": [
+      "/kaggle/working/agent-routing-recsys-artifact/data/processed/wildchat_agent12_balanced_3000_equalized_train.csv",
+      "/kaggle/working/agent-routing-recsys-artifact/data/processed/wildchat_agent12_balanced_3000_equalized_dev.csv",
+      "/kaggle/working/agent-routing-recsys-artifact/data/processed/wildchat_agent12_balanced_3000_equalized_test.csv"
+    ],
+    "input_rows_after_normalized_deduplication": 3000,
+    "input_sha256": "536bb8ec1e57293368d7811d4a1c6dd4b2c343a203dd0958a76178c29a418c65",
+    "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+    "embedding_dimension": 384,
+    "similarity_threshold": 0.82,
+    "grouping_rule": "Connected components of the exact all-pairs cosine graph; every pair at or above the threshold is forced into the same split.",
+    "num_semantic_groups": 2421,
+    "largest_group_rows": 76,
+    "singleton_groups": 2184,
+    "requested_fractions": {
+      "train": 0.8,
+      "dev": 0.1,
+      "test": 0.1
+    },
+    "actual_rows": {
+      "train": 2400,
+      "dev": 301,
+      "test": 299
+    },
+    "assignment_trials": 20000,
+    "assignment_seed": 42,
+    "assignment_score": 0.08322974833465224,
+    "agent_names": [
+      "APIDataFetchAgent",
+      "AnomalyDetectionAgent",
+      "ForecastAgent",
+      "LogRetrievalAgent",
+      "MetadataLookupAgent",
+      "PlotGenerationAgent",
+      "ReportWriterAgent",
+      "SQLQueryAgent",
+      "StatisticalAnalysisAgent",
+      "SummaryAgent",
+      "TimeSeriesQueryAgent",
+      "TrendAnalysisAgent"
+    ],
+    "cardinalities": [
+      1,
+      2,
+      3
+    ],
+    "max_cross_split_cosine": {
+      "train_dev": 0.8136104941368103,
+      "train_test": 0.8189690709114075,
+      "dev_test": 0.8168465495109558
+    },
+    "max_cross_split_below_threshold": true,
+    "component_feature_totals": [
+      [
+        2400.0,
+        289.0,
+        287.0,
+        297.0,
+        294.0,
+        306.0,
+        296.0,
+        306.0,
+        314.0,
+        310.0,
+        297.0,
+        306.0,
+        305.0,
+        1436.0,
+        721.0,
+        243.0
+      ],
+      [
+        301.0,
+        37.0,
+        50.0,
+        43.0,
+        47.0,
+        33.0,
+        38.0,
+        37.0,
+        34.0,
+        34.0,
+        34.0,
+        35.0,
+        39.0,
+        176.0,
+        90.0,
+        35.0
+      ],
+      [
+        299.0,
+        49.0,
+        38.0,
+        35.0,
+        34.0,
+        36.0,
+        41.0,
+        32.0,
+        27.0,
+        31.0,
+        44.0,
+        34.0,
+        31.0,
+        188.0,
+        89.0,
+        22.0
+      ]
+    ]
+  }
+}

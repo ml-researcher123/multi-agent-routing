@@ -70,7 +70,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dataset", required=True, help="CSV with prompt and gold_agents")
     ap.add_argument("--inventory_json", required=True, help="Fixed agent inventory JSON")
-    ap.add_argument("--model", default="gpt-4o-mini")
+    ap.add_argument("--model", default="gpt-4o")
     ap.add_argument("--output_csv", default="llm_router_predictions.csv")
     args = ap.parse_args()
 

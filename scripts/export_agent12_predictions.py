@@ -238,7 +238,7 @@ def main() -> None:
         gold_sets = [ex.gold_agents for ex in test_all]
 
         if "majority" in methods:
-            majority = _majority_agent(test_all)
+            majority = _majority_agent(train_all)
             preds = [[majority] if majority else [] for _ in test_all]
             combined_rows["majority"].extend(prediction_rows(seed, raw_rows, gold_sets, preds))
 
